@@ -10,3 +10,78 @@ You should record previous games in a List and there should be an option in the 
 You don't need to record results on a database. Once the program is closed the results will be deleted.
 
 */
+
+// This code is executed immediately after running "dotnet run"
+Console.WriteLine("\n");
+Console.WriteLine("Please type your name..");
+
+/* Code stops execution at this line, waiting for input.
+Pausing execution and waiting for input is normal behaviour for Console.ReadLine() in Console Applications. */
+
+var name = Console.ReadLine();
+var date = DateTime.UtcNow;
+
+Console.WriteLine("\n");
+Console.WriteLine("-------------------------------------------");
+Console.WriteLine("\n");
+Console.WriteLine($"Hello {name}. Today is {date.DayOfWeek} the {date.Day}th and you are playing the math game.\n ");
+Console.WriteLine("What game will you be playing?");
+Console.WriteLine(@"
+A - Addition
+S - Subtraction
+M - Multiplication
+D - Division
+Q - Quit the program");
+Console.WriteLine("\n");
+Console.WriteLine("-------------------------------------------");
+
+var GameMode = Console.ReadLine().Trim().ToLower();
+if (GameMode == "a") 
+{
+            AddGame("Addition Game Selected");
+} 
+else if (GameMode == "s") 
+{
+    SubGame("Subtraction Game Selected");
+} 
+else if (GameMode == "m") 
+{
+    MultGame("Multiplication Game Selected");
+} 
+else if (GameMode == "d") 
+{
+    DivGame("Division Game Selected");
+} 
+else if (GameMode == "q") {
+        Console.WriteLine("Thanks For Playing!");
+        Environment.Exit(1);
+} 
+else {
+    Console.WriteLine("Invalid Input, Please Try Again..");
+}
+
+void AddGame(string message) 
+{
+    Console.WriteLine(message);
+}
+
+void SubGame(string message)
+{
+    Console.WriteLine(message);
+}
+
+void MultGame(string message) 
+{
+    Console.WriteLine(message);
+}
+
+void DivGame(string message)
+{
+    Console.WriteLine(message);
+}
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Launch (MathGame)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/MathGame/bin/Debug/net9.0/MathGame.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/MathGame",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    },
+    {
+      "name": ".NET Launch (FunWithStrings)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/FunWithStrings/bin/Debug/net9.0/FunWithStrings.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/FunWithStrings",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    }
+  ]
+}
