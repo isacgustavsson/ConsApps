@@ -11,22 +11,22 @@ You don't need to record results on a database. Once the program is closed the r
 
 */
 
-// This code is executed immediately after running "dotnet run"
-Console.WriteLine("\n");
-Console.WriteLine("Please type your name..");
+var date = DateTime.UtcNow;
+string name = getName();
+Menu(name);
 
-/* Code stops execution at this line, waiting for input.
-Pausing execution and waiting for input is normal behaviour for Console.ReadLine() in Console Applications. */
-
-var name = Console.ReadLine();
-
-Menu(Console.ReadLine(), DateTime.UtcNow);
-
-void Menu(string? name, DateTime date)
+string getName()
 {
-    Console.WriteLine("\n");
+    Console.WriteLine("Please type your name..");
+    var name = Console.ReadLine();
+    return name;
+}
+
+void Menu(string name)
+{
+    Console.WriteLine("");
     Console.WriteLine("-------------------------------------------");
-    Console.WriteLine("\n");
+    Console.WriteLine("");
     Console.WriteLine($"Hello {name}. Today is {date.DayOfWeek} the {date.Day}th and you are playing the math game.\n ");
     Console.WriteLine("What game will you be playing?");
     Console.WriteLine(@"
@@ -35,7 +35,7 @@ S - Subtraction
 M - Multiplication
 D - Division
 Q - Quit the program");
-    Console.WriteLine("\n");
+    Console.WriteLine("");
     Console.WriteLine("-------------------------------------------");
 
     var GameMode = Console.ReadLine().Trim().ToLower();
@@ -43,19 +43,23 @@ Q - Quit the program");
     switch (GameMode.Trim().ToLower())
     {
         case "a":
-            AddGame("Addition game selected.");
+            AddGame($"Addition game");
+            Console.WriteLine("");
             break;
 
         case "s":
-            SubGame("Subtraction game selected.");
+            SubGame("Subtraction game");
+            Console.WriteLine("");
             break;
 
         case "m":
-            MultGame("Multiplication game selected.");
+            MultGame("Multiplication game");
+            Console.WriteLine("");
             break;
 
         case "d":
-            DivGame("Division game selected");
+            DivGame("Division game");
+            Console.WriteLine("");
             break;
 
         case "q":
@@ -64,24 +68,180 @@ Q - Quit the program");
     }
 }
 
-void AddGame(string message) 
+void AddGame(string message)
 {
-    Console.WriteLine(message);
+    var score = 0;
+
+    for (int i = 0; i < 5; i++)
+    {
+        Console.Clear();
+        Console.WriteLine(message);
+
+        var random = new Random();
+        int firstNumber;
+        int secondNumber;
+
+
+        firstNumber = random.Next(1, 9);
+        secondNumber = random.Next(1, 9);
+
+        Console.WriteLine($"{firstNumber} + {secondNumber}");
+
+        var result = Console.ReadLine();
+
+        if (int.Parse(result) == firstNumber + secondNumber)
+        {
+            Console.WriteLine("Correct answer! Type any key for the next question..");
+            score++;
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.WriteLine("Incorrect answer. Type any key for the next question..");
+            Console.ReadLine();
+        }
+
+        if (i == 4)
+        {
+            Console.WriteLine($"Game Over! Your final score is: {score}");
+        }
+    }
 }
 
 void SubGame(string message)
 {
-    Console.WriteLine(message);
+    var score = 0;
+
+    for (int i = 0; i < 5; i++)
+    {
+        Console.Clear();
+        Console.WriteLine(message);
+
+        var random = new Random();
+        int firstNumber;
+        int secondNumber;
+
+        firstNumber = random.Next(1, 9);
+        secondNumber = random.Next(1, 9);
+
+        Console.WriteLine($"{firstNumber} - {secondNumber}");
+        var result = Console.ReadLine();
+
+        if (int.Parse(result) == firstNumber - secondNumber)
+        {
+            Console.WriteLine("Correct answer. Type any key for the next question..");
+            score++;
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.WriteLine("Incorrect answer. Type any key for the next question..");
+            Console.ReadLine();
+        }
+
+        if (i == 4)
+        {
+            Console.WriteLine($"Game Over. Your final score is {score}.");
+        }
+    }
 }
 
-void MultGame(string message) 
+void MultGame(string message)
 {
-    Console.WriteLine(message);
+    var score = 0;
+
+    for (int i = 0; i < 5; i++)
+    {
+        Console.Clear();
+        Console.WriteLine(message);
+
+        var Random = new Random();
+
+        int firstNumber;
+        int secondNumber;
+        firstNumber = Random.Next(1, 9);
+        secondNumber = Random.Next(1, 9);
+
+        Console.WriteLine($"{firstNumber} * {secondNumber}");
+        var result = Console.ReadLine();
+
+        if (int.Parse(result) == firstNumber * secondNumber)
+        {
+            Console.WriteLine("Correct answer. Type any key for the next question..");
+            score++;
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.WriteLine("Incorrect answer. Type any key for the next question..");
+            Console.ReadLine();
+        }
+
+        if (i == 4)
+        {
+            Console.WriteLine($"Game Over. Your final score is: {score}");
+        }
+    }
 }
 
 void DivGame(string message)
 {
-    Console.WriteLine(message);
+    var score = 0;
+
+       for (int i = 0; i < 5; i++)
+    {
+        Console.Clear();
+        Console.WriteLine(message);
+
+        var divNumbers = GetDivNumbers();
+        var firstNumber = divNumbers[0];
+        var secondNumber = divNumbers[1];
+
+        Console.WriteLine($"{divNumbers[0]} / {divNumbers[1]}");
+        var result = Console.ReadLine();
+
+        if (int.Parse(result) == firstNumber / secondNumber)
+        {
+            Console.WriteLine("Correct answer. Type any key for the next question..");
+            score++;
+            Console.ReadLine();
+        }
+        else
+        {
+            Console.WriteLine("Incorrect answer. Type any key for the next question..");
+            Console.ReadLine();
+
+        }
+
+        if (i == 4)
+        {
+            Console.WriteLine($"Game Over. Your final score is: {score}");
+        }
+    }
+
+
+}
+
+int[] GetDivNumbers()
+{
+    var random = new Random();
+    var firstNumber = random.Next(0, 99);
+    var secondNumber = random.Next(1, 99);
+
+    var result = new int[2];
+
+    while (firstNumber % secondNumber != 0)
+    {
+        firstNumber = random.Next(0, 99);
+        secondNumber = random.Next(0, 99);
+    }
+
+    result[0] = firstNumber;
+    result[1] = secondNumber;
+
+    Console.WriteLine(result);
+
+    return result;
 }
 
 
