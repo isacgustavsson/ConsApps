@@ -5,7 +5,7 @@
       "label": "build",
       "command": "dotnet",
       "type": "process",
-      "args": ["build", "${workspaceFolder}/webApp.sln"],
+      "args": ["build", "${workspaceFolder}/ConsApps.sln"],
       "problemMatcher": "$msCompile"
     }
   ]

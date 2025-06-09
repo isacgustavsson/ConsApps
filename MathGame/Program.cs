@@ -12,7 +12,11 @@ You don't need to record results on a database. Once the program is closed the r
 */
 
 var date = DateTime.UtcNow;
+
+var games = new List<string>();
+
 string name = getName();
+
 Menu(name);
 
 string getName()
@@ -24,48 +28,79 @@ string getName()
 
 void Menu(string name)
 {
-    Console.WriteLine("");
-    Console.WriteLine("-------------------------------------------");
-    Console.WriteLine("");
-    Console.WriteLine($"Hello {name}. Today is {date.DayOfWeek} the {date.Day}th and you are playing the math game.\n ");
-    Console.WriteLine("What game will you be playing?");
-    Console.WriteLine(@"
+    Console.Clear();
+    var isGameOn = true;
+    do
+    {
+        Console.WriteLine("");
+        Console.WriteLine("-------------------------------------------");
+        Console.WriteLine("");
+        Console.WriteLine($"Hello {name}. Today is {date.DayOfWeek} the {date.Day}th and you are playing the math game.\n ");
+        Console.WriteLine("What game will you be playing?");
+        Console.WriteLine(@"
 A - Addition
 S - Subtraction
 M - Multiplication
 D - Division
+V - See Game History
 Q - Quit the program");
-    Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("-------------------------------------------");
+
+        var GameMode = Console.ReadLine().Trim().ToLower();
+
+        switch (GameMode.Trim().ToLower())
+        {
+            case "a":
+                AddGame("Addition game");
+                Console.WriteLine("");
+                break;
+
+            case "s":
+                SubGame("Subtraction game");
+                Console.WriteLine("");
+                break;
+
+            case "m":
+                MultGame("Multiplication game");
+                Console.WriteLine("");
+                break;
+
+            case "d":
+                DivGame("Division game");
+                Console.WriteLine("");
+                break;
+
+            case "v":
+                GetGames();
+                break;
+
+            case "q":
+                isGameOn = false;
+                break;
+        }
+    } while (isGameOn);
+
+}
+
+void GetGames()
+{
+    Console.Clear();
+    Console.WriteLine("Game History");
     Console.WriteLine("-------------------------------------------");
-
-    var GameMode = Console.ReadLine().Trim().ToLower();
-
-    switch (GameMode.Trim().ToLower())
+    foreach (var game in games)
     {
-        case "a":
-            AddGame($"Addition game");
-            Console.WriteLine("");
-            break;
-
-        case "s":
-            SubGame("Subtraction game");
-            Console.WriteLine("");
-            break;
-
-        case "m":
-            MultGame("Multiplication game");
-            Console.WriteLine("");
-            break;
-
-        case "d":
-            DivGame("Division game");
-            Console.WriteLine("");
-            break;
-
-        case "q":
-            Environment.Exit(1);
-            break;
+        Console.WriteLine(game);
     }
+    Console.WriteLine("-------------------------------------------\n");
+    Console.WriteLine("Press Enter to return to the menu.");
+    Console.ReadLine();
+
+}
+
+void AddToHistory(int gameScore, string gameType)
+{
+    games.Add($"{DateTime.Now} - {gameType} | Score:{gameScore}");
 }
 
 void AddGame(string message)
@@ -106,6 +141,8 @@ void AddGame(string message)
             Console.WriteLine($"Game Over! Your final score is: {score}");
         }
     }
+
+    AddToHistory(score, "Addition");
 }
 
 void SubGame(string message)
@@ -144,6 +181,7 @@ void SubGame(string message)
             Console.WriteLine($"Game Over. Your final score is {score}.");
         }
     }
+        AddToHistory(score, "Subtraction");
 }
 
 void MultGame(string message)
@@ -182,6 +220,7 @@ void MultGame(string message)
             Console.WriteLine($"Game Over. Your final score is: {score}");
         }
     }
+        AddToHistory(score, "Multiplication");
 }
 
 void DivGame(string message)
@@ -218,8 +257,7 @@ void DivGame(string message)
             Console.WriteLine($"Game Over. Your final score is: {score}");
         }
     }
-
-
+    AddToHistory(score, "Division");
 }
 
 int[] GetDivNumbers()
@@ -230,7 +268,7 @@ int[] GetDivNumbers()
 
     var result = new int[2];
 
-    while (firstNumber % secondNumber != 0)
+    
     {
         firstNumber = random.Next(0, 99);
         secondNumber = random.Next(0, 99);
@@ -243,29 +281,3 @@ int[] GetDivNumbers()
 
     return result;
 }
-
-
-// Game mode menu using If Else statements instead of the Switch method below.
-// if (GameMode == "a") 
-// {
-//             AddGame("Addition Game Selected");
-// } 
-// else if (GameMode == "s") 
-// {
-//     SubGame("Subtraction Game Selected");
-// } 
-// else if (GameMode == "m") 
-// {
-//     MultGame("Multiplication Game Selected");
-// } 
-// else if (GameMode == "d") 
-// {
-//     DivGame("Division Game Selected");
-// } 
-// else if (GameMode == "q") {
-//         Console.WriteLine("Thanks For Playing!");
-//         Environment.Exit(1);
-// } 
-// else {
-//     Console.WriteLine("Invalid Input, Please Try Again..");
-// }

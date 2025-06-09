@@ -13,13 +13,13 @@
       "console": "internalConsole"
     },
     {
-      "name": ".NET Launch (FunWithStrings)",
+      "name": ".NET Launch (PlayGround)",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/FunWithStrings/bin/Debug/net9.0/FunWithStrings.dll",
+      "program": "${workspaceFolder}/PlayGround/bin/Debug/net9.0/PlayGround.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/FunWithStrings",
+      "cwd": "${workspaceFolder}/PlayGround",
       "stopAtEntry": false,
       "console": "internalConsole"
     }
