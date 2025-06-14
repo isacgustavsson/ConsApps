@@ -13,7 +13,8 @@ namespace MathGame
             var isGameOn = true;
             do
             {
-                Console.WriteLine("-------------------------------------------");                Console.WriteLine("");
+                Console.WriteLine("-------------------------------------------");
+                Console.WriteLine("");
                 Console.WriteLine("What game will you be playing?");
                 Console.WriteLine(@"
 A - Addition
@@ -27,36 +28,106 @@ Q - Quit the program");
 
                 var GameMode = Console.ReadLine().Trim().ToLower();
 
-                switch (GameMode.Trim().ToLower())
+                if (GameMode == "a" || GameMode == "s" || GameMode == "m" || GameMode == "d")
                 {
-                    case "a":
-                        engine.AddGame("Addition game");
-                        Console.WriteLine("");
-                        break;
+                    Console.WriteLine("Please select level of difficulty");
+                    Console.WriteLine(@"
+x - Easy
+y - Medium
+z - Hard");
 
-                    case "s":
-                        engine.SubGame("Subtraction game");
-                        Console.WriteLine("");
-                        break;
+                    var Level = Console.ReadLine().Trim().ToLower();
 
-                    case "m":
-                        engine.MultGame("Multiplication game");
-                        Console.WriteLine("");
-                        break;
+                    switch (GameMode.Trim().ToLower())
+                    {
+                        case "a":
+                            if (Level == "x")
+                            {
+                                engine.AddGame("Addition Game", 1);
+                                Console.WriteLine("");
+                            }
+                            else if (Level == "y")
+                            {
+                                engine.AddGame("Addition Game - Medium", 2);
+                                Console.WriteLine("");
+                            }
+                            else if (Level == "z")
+                            {
+                                engine.AddGame("Addition Game - Hard", 3);
+                                Console.WriteLine("");
+                            }
+                            break;
 
-                    case "d":
-                        engine.DivGame("Division game");
-                        Console.WriteLine("");
-                        break;
+                        case "s":
+                            if (Level == "x")
+                            {
+                                engine.SubGame("Subtraction game - Easy", 1);
+                                Console.WriteLine("");
+                            }
+                            else if (Level == "y")
+                            {
+                                engine.SubGame("Subtraction game - Medium", 2);
+                                Console.WriteLine("");
+                            }
+                            else if (Level == "z")
+                            {
+                                engine.SubGame("Subtraction game - Hard", 3);
+                                Console.WriteLine("");
+                            }
+                            break;
 
-                    case "v":
-                        Helpers.PrintGames();
-                        break;
+                        case "m":
+                            if (Level == "x")
+                            {
+                                engine.MultGame("Multiplication game - Easy", 1);
+                                Console.WriteLine("");
+                            }
+                            else if (Level == "y")
+                            {
+                                engine.MultGame("Multiplication game - Medium", 2);
+                                Console.WriteLine("");
+                            }
+                            else if (Level == "z")
+                            {
+                                engine.MultGame("Multiplication game - Hard", 3);
+                                Console.WriteLine("");
+                            }
+                            break;
 
-                    case "q":
-                        isGameOn = false;
-                        break;
+                        case "d":
+                            if (Level == "x")
+                            {
+                                engine.DivGame("Division game", 1);
+                                Console.WriteLine("");
+                            }
+                            else if (Level == "y")
+                            {
+                                engine.DivGame("Division game", 2);
+                                Console.WriteLine("");
+                            }
+                            else if (Level == "z")
+                            {
+                                engine.DivGame("Division game", 3);
+                                Console.WriteLine("");
+                            }
+                            break;
+                    }
+
                 }
+                else if (GameMode == "v" || GameMode == "q")
+                {
+                    switch (GameMode.Trim().ToLower())
+                    {
+                        case "v":
+                            Helpers.PrintGames();
+                            break;
+
+                        case "q":
+                            isGameOn = false;
+                            break;
+                    }
+                }
+                ;
             } while (isGameOn);
 
         }

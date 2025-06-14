@@ -4,20 +4,34 @@ namespace MathGame
 {
     internal class GameEngine
     {
-        internal void AddGame(string message)
-{
-    var score = 0;
-    var random = new Random();
-    int firstNumber;
-    int secondNumber;
+        internal void AddGame(string message, int level)
+        {
+            var score = 0;
+            var random = new Random();
+            int firstNumber;
+            int secondNumber;
 
-    for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Console.Clear();
                 Console.WriteLine(message);
 
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                if (level == 1)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+                }
+                else if (level == 2)
+                {
+                    firstNumber = random.Next(1, 99);
+                    secondNumber = random.Next(1, 99);
+                }
+                else if (level == 3)
+                {
+                    firstNumber = random.Next(1, 999);
+                    secondNumber = random.Next(1, 999);
+                }
+                else return;
 
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
 
@@ -43,31 +57,45 @@ namespace MathGame
                 }
             }
 
-    Helpers.AddToHistory(score, GameType.Addition);
-}
+            Helpers.AddToHistory(score, GameType.Addition);
+        }
 
-        internal void SubGame(string message)
+        internal void SubGame(string message, int level)
 {
     var score = 0;
+    var random = new Random();
+    int firstNumber;
+    int secondNumber;
 
     for (int i = 0; i < 5; i++)
-    {
-        Console.Clear();
-        Console.WriteLine(message);
+            {
+                Console.Clear();
+                Console.WriteLine(message);
 
-        var random = new Random();
-        int firstNumber;
-        int secondNumber;
+                if (level == 1)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+                }
+                else if (level == 2)
+                {
+                    firstNumber = random.Next(1, 99);
+                    secondNumber = random.Next(1, 99);
+                }
+                else if (level == 3)
+                {
+                    firstNumber = random.Next(1, 999);
+                    secondNumber = random.Next(1, 999);
+                }
+                else return;
 
-        firstNumber = random.Next(1, 9);
-        secondNumber = random.Next(1, 9);
 
-        Console.WriteLine($"{firstNumber} - {secondNumber}");
-        
-        var result = Console.ReadLine();
-        result = Helpers.ValidateResult(result);
-    
-        if (int.Parse(result) == firstNumber - secondNumber)
+                Console.WriteLine($"{firstNumber} - {secondNumber}");
+
+                var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
+
+                if (int.Parse(result) == firstNumber - secondNumber)
                 {
                     Console.WriteLine("Correct answer. Type any key for the next question..");
                     score++;
@@ -79,75 +107,112 @@ namespace MathGame
                     Console.ReadLine();
                 }
 
-        if (i == 4)
-        {
-            Console.WriteLine($"Game Over. Your final score is {score}.");
-        }
-    }
+                if (i == 4)
+                {
+                    Console.WriteLine($"Game Over. Your final score is {score}.");
+                }
+            }
     Helpers.AddToHistory(score, GameType.Subtraction);
 }
 
-        internal void MultGame(string message)
+        internal void MultGame(string message, int level)
 {
     var score = 0;
+    var random = new Random();
+    int firstNumber;
+    int secondNumber;
 
     for (int i = 0; i < 5; i++)
-    {
-        Console.Clear();
-        Console.WriteLine(message);
+            {
+                Console.Clear();
+                Console.WriteLine(message);
 
-        var Random = new Random();
+                if (level == 1)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+                }
+                else if (level == 2)
+                {
+                    firstNumber = random.Next(1, 99);
+                    secondNumber = random.Next(1, 99);
+                }
+                else if (level == 3)
+                {
+                    firstNumber = random.Next(1, 999);
+                    secondNumber = random.Next(1, 999);
+                }
+                else return;
 
-        int firstNumber;
-        int secondNumber;
-        firstNumber = Random.Next(1, 9);
-        secondNumber = Random.Next(1, 9);
+                Console.WriteLine($"{firstNumber} * {secondNumber}");
 
-        Console.WriteLine($"{firstNumber} * {secondNumber}");
+                var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
 
-        var result = Console.ReadLine();
-        result = Helpers.ValidateResult(result);
+                if (int.Parse(result) == firstNumber * secondNumber)
+                {
+                    Console.WriteLine("Correct answer. Type any key for the next question..");
+                    score++;
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect answer. Type any key for the next question..");
+                    Console.ReadLine();
+                }
 
-        if (int.Parse(result) == firstNumber * secondNumber)
-        {
-            Console.WriteLine("Correct answer. Type any key for the next question..");
-            score++;
-            Console.ReadLine();
-        }
-        else
-        {
-            Console.WriteLine("Incorrect answer. Type any key for the next question..");
-            Console.ReadLine();
-        }
-
-        if (i == 4)
-        {
-            Console.WriteLine($"Game Over. Your final score is: {score}");
-        }
-    }
+                if (i == 4)
+                {
+                    Console.WriteLine($"Game Over. Your final score is: {score}");
+                }
+            }
         Helpers.AddToHistory(score, GameType.Multiplication);
 }
 
-        internal void DivGame(string message)
+        internal void DivGame(string message, int level)
 {
-    var score = 0;
+            var score = 0;
+            var firstNumber = 0;
+            var secondNumber = 0;
+
 
        for (int i = 0; i < 5; i++)
-    {
-        Console.Clear();
-        Console.WriteLine(message);
-
-        var divNumbers = Helpers.GetDivNumbers();
-        var firstNumber = divNumbers[0];
-        var secondNumber = divNumbers[1];
-
-        Console.WriteLine($"{divNumbers[0]} / {divNumbers[1]}");
-        
-        var result = Console.ReadLine();
-        result = Helpers.ValidateResult(result);
+            {
+                Console.Clear();
+                Console.WriteLine(message);
+                var divNumbers = Helpers.GetDivNumbers();
 
 
-        if (int.Parse(result) == firstNumber / secondNumber)
+                if (level == 1)
+                {
+                    firstNumber = divNumbers[0];
+                    secondNumber = divNumbers[1];
+
+                    Console.WriteLine($"{divNumbers[0]} / {divNumbers[1]}");
+
+                }
+                else if (level == 2)
+                {
+                    firstNumber = divNumbers[2];
+                    secondNumber = divNumbers[3];
+
+                    Console.WriteLine($"{divNumbers[2]} / {divNumbers[3]}");
+
+                }
+                else if (level == 3)
+                {
+                    firstNumber = divNumbers[4];
+                    secondNumber = divNumbers[5];
+
+                    Console.WriteLine($"{divNumbers[4]} / {divNumbers[5]}");
+
+                }
+
+                var result = Console.ReadLine();
+                result = Helpers.ValidateResult(result);
+
+
+                if (int.Parse(result) == firstNumber / secondNumber)
                 {
                     Console.WriteLine("Correct answer. Type any key for the next question..");
                     score++;
@@ -160,11 +225,11 @@ namespace MathGame
 
                 }
 
-        if (i == 4)
-        {
-            Console.WriteLine($"Game Over. Your final score is: {score}");
-        }
-    }
+                if (i == 4)
+                {
+                    Console.WriteLine($"Game Over. Your final score is: {score}");
+                }
+            }
     Helpers.AddToHistory(score, GameType.Division);
 }
     }
