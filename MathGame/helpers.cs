@@ -5,7 +5,7 @@ namespace MathGame
     internal class Helpers
     {
         internal static List<Game> games = new List<Game>();
-             internal static void AddToHistory(int gameScore, string gameType)
+        internal static void AddToHistory(int gameScore, GameType gameType)
         {
             games.Add(new Game
             {
@@ -16,10 +16,12 @@ namespace MathGame
         }
         internal static void PrintGames()
         {
+
+            var gamesToPrint = games.Where(x => x.Type == GameType.Division);
             Console.Clear();
             Console.WriteLine("Game History");
             Console.WriteLine("-------------------------------------------");
-            foreach (var game in games)
+            foreach (var game in gamesToPrint)
             {
                 Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts");
             }
@@ -48,6 +50,28 @@ namespace MathGame
             Console.WriteLine(result);
 
             return result;
+        }
+        internal static string? ValidateResult(string? result)
+        {
+            while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
+            {
+                Console.WriteLine("Your answer needs to be an integer. Try again.");
+                result = Console.ReadLine();
+            }
+            return result;
+        }
+
+        internal static string getName()
+        {
+            Console.WriteLine("Please type your name..");
+            var name = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(name))
+            {
+                Console.WriteLine("Name cannot be empty. Try Again.");
+                name = Console.ReadLine();
+            }
+            return name;
         }
     }
 }

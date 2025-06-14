@@ -16,14 +16,8 @@ var menu = new Menu();
 
 var date = DateTime.UtcNow;
 
-string name = getName();
+string name = Helpers.getName();
 
 menu.ShowMenu(name, date);
 
-string getName()
-{
-    Console.WriteLine("Please type your name..");
-    var name = Console.ReadLine();
-    return name;
-}
 

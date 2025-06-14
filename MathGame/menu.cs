@@ -6,13 +6,14 @@ namespace MathGame
     internal void ShowMenu(string name, DateTime date)
         {
             Console.Clear();
+            Console.WriteLine($"Hello {name}. Today is {date.DayOfWeek} the {date.Day}th and you are playing the math game.\n ");
+            Console.WriteLine("Press any key to show the menu.");
+            Console.ReadLine();
+
             var isGameOn = true;
             do
             {
-                Console.WriteLine("");
-                Console.WriteLine("-------------------------------------------");
-                Console.WriteLine("");
-                Console.WriteLine($"Hello {name}. Today is {date.DayOfWeek} the {date.Day}th and you are playing the math game.\n ");
+                Console.WriteLine("-------------------------------------------");                Console.WriteLine("");
                 Console.WriteLine("What game will you be playing?");
                 Console.WriteLine(@"
 A - Addition
